@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     {
         Move();
         ApplyGravity();
+        CheckGrounded();
     }
 
     void Move()
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
-        if (value.isPressed && CheckGrounded())
+        if (value.isPressed && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
@@ -76,8 +77,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool CheckGrounded()
+    public void CheckGrounded()
     {
-        return isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
+         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
     }
 }
